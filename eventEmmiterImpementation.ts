@@ -10,8 +10,12 @@ class EventEmitter {
     }
 
     emit(eventName: string, ...args: any[]): void {
-        !this.events[eventName] && this.events[eventName].forEach(listener => {listener(...args); });
+        if (this.events[eventName]) {
+            this.events[eventName].forEach(listener => {
+                listener(...args);
+            });
     }
+}
     
     off(eventName: string, listener: Listener): void {
         if (this.events[eventName]) {
